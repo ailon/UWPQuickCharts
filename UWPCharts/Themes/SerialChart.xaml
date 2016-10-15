@@ -1,0 +1,58 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:amq="using:Ailon.QuickCharts"
+    >
+    <Style TargetType="amq:SerialChart">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="amq:SerialChart">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}"
+                            >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <amq:ValueAxis x:Name="PART_ValueAxis" Grid.Row="0" Margin="0,0,0,-2" 
+                                           Canvas.ZIndex="100"
+                                           Foreground="{TemplateBinding AxisForeground}"
+                                           HorizontalAlignment="Right"
+                                           />
+                            <amq:CategoryAxis x:Name="PART_CategoryAxis" Grid.Row="1" 
+                                              Foreground="{TemplateBinding AxisForeground}"
+                                              />
+
+                            <Border Grid.Row="0" Background="{TemplateBinding PlotAreaBackground}">
+                                <amq:ValueGrid x:Name="PART_ValueGrid" Foreground="{TemplateBinding GridStroke}" />
+                            </Border>
+                            
+                            <Border x:Name="PART_GraphCanvasDecorator" Grid.Row="0">
+                                <Canvas x:Name="PART_GraphCanvas" Background="Transparent" />
+                            </Border>
+
+                            <amq:Legend x:Name="PART_Legend" Grid.Row="0" 
+                                        Margin="10,0,0,0" 
+                                        Visibility="{TemplateBinding LegendVisibility}"
+                                        VerticalAlignment="Top" HorizontalAlignment="Left"
+                                        />
+
+                            <Canvas Grid.Row="0">
+                                <amq:Balloon x:Name="PART_Balloon" 
+                                             BorderBrush="{TemplateBinding AxisForeground}" 
+                                             BorderThickness="2"
+                                             Visibility="Collapsed"
+                                             />
+                            </Canvas>
+
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

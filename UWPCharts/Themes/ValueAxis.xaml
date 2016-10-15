@@ -1,0 +1,28 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:amq="using:Ailon.QuickCharts"
+    >
+    <Style TargetType="amq:ValueAxis">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="amq:ValueAxis">
+                    <Grid Background="Transparent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <Canvas x:Name="PART_ValuesPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                        <Canvas x:Name="PART_TickPanel" Grid.Column="1" Width="5" VerticalAlignment="Stretch" />
+
+                        <Rectangle x:Name="PART_AxisLine" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Right"
+                              Fill="{TemplateBinding Foreground}" Width="2"
+                              /> 
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
