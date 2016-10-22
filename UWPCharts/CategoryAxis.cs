@@ -148,7 +148,7 @@ namespace Ailon.QuickCharts
                 _valuesPanel.Children.Add(_valueBoxes[i]);
                 _tickPanel.Children.Add(_valueTicks[i]);
             }
-            this.InvalidateMeasure();
+//            this.InvalidateMeasure();
         }
 
         private void RemoveValueObjects(int count)
