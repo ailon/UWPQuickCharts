@@ -21,11 +21,7 @@ namespace Ailon.QuickCharts
         /// <returns>Size of the TextBlock</returns>
         public static Size GetDesiredSize(this TextBlock textBlock)
         {
-#if SILVERLIGHT
-            return new Size(textBlock.ActualWidth, textBlock.ActualHeight);
-#else
             return textBlock.DesiredSize;
-#endif
         }
     }
 }
