@@ -10,50 +10,110 @@
     mc:Ignorable="d">
 
     <ScrollViewer HorizontalScrollMode="Disabled" VerticalScrollMode="Enabled" Padding="10">
-        <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-            <TextBlock Name="WarningText">WARNING: This demo app uses release nuget package rather than referencing directly to the source project.</TextBlock>
-            <qc:SerialChart Name="VisitOverviewChart" 
-                            DataSource="{Binding VisitData}"
-                            CategoryValueMemberPath="Date"
-                            RelativePanel.Below="WarningText" MaxHeight="500">
-                <qc:SerialChart.Graphs>
-                    <qc:AreaGraph Title="Visits" ValueMemberPath="Visits" />
-                    <qc:LineGraph Title="Page views" ValueMemberPath="PageViews" />
-                </qc:SerialChart.Graphs>
-            </qc:SerialChart>
-            <qc:PieChart Name="OSChart" 
-                         DataSource="{Binding OsData}"
-                         TitleMemberPath="Name" ValueMemberPath="Value"
-                         LegendVisibility="Visible"
-                         
-                         RelativePanel.Below="VisitOverviewChart" 
-                         RelativePanel.AlignLeftWithPanel="True"
-                         MinHeight="200" MaxHeight="200"
-                         MinWidth="300" MaxWidth="400"
-                         />
-            <qc:SerialChart Name="NewVisitorsChart" 
-                            DataSource="{Binding VisitData}"
-                            CategoryValueMemberPath="Date"
-                            RelativePanel.Below="VisitOverviewChart" 
-                            RelativePanel.RightOf="OSChart"
-                            MinHeight="100" MaxHeight="200" MaxWidth="500" MinWidth="200" >
-                <qc:SerialChart.Graphs>
-                    <qc:ColumnGraph Title="New visitors" ValueMemberPath="NewVisits" />
-                </qc:SerialChart.Graphs>
-            </qc:SerialChart>
-            <qc:SerialChart Name="RealTimeVisits" 
-                            DataSource="{Binding RealTimeData}"
-                            CategoryValueMemberPath="Seconds"
-                            RelativePanel.RightOf="NewVisitorsChart" 
-                            RelativePanel.Below="VisitOverviewChart"
-                            RelativePanel.AlignRightWithPanel="True"
-                            MinHeight="100" MaxHeight="200"
-                            MinWidth="200"
-                            >
-                <qc:SerialChart.Graphs>
-                    <qc:ColumnGraph Title="Realtime visits" ValueMemberPath="Visits" />
-                </qc:SerialChart.Graphs>
-            </qc:SerialChart>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Mobile">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="320" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="VisitOverviewChart.(MaxHeight)" Value="300"/>
+                        <Setter Target="RealTimeVisits.(RelativePanel.AlignRightWithPanel)" Value="True"/>
+                        <Setter Target="OSChart.(RelativePanel.Below)" Value="RealTimeVisits"/>
+                        <Setter Target="OSChart.(RelativePanel.RightOf)" Value=""/>
+                        <Setter Target="OSChart.(RelativePanel.AlignLeftWithPanel)" Value="True"/>
+                        <Setter Target="OSChart.(RelativePanel.AlignRightWithPanel)" Value="True"/>
+                        <Setter Target="NewVisitorsChart.(RelativePanel.Below)" Value="OSChart"/>
+                        <Setter Target="NewVisitorsChart.(RelativePanel.RightOf)" Value=""/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1000" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="RealTimeVisits.(MaxWidth)" Value="400"/>
+                        <Setter Target="OSChart.(MaxWidth)" Value="500"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <RelativePanel Background="LightGray" Padding="5">
+            <RelativePanel.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="Background" Value="White" />
+                    <Setter Property="Margin" Value="5" />
+                    <Setter Property="Padding" Value="10" />
+                    <Setter Property="BorderBrush" Value="DarkGray" />
+                    <Setter Property="BorderThickness" Value="1" />
+                </Style>
+            </RelativePanel.Resources>
+
+            <Border Name="WarningText" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
+                <TextBlock TextWrapping="WrapWholeWords">WARNING: This demo app uses release nuget package rather than referencing directly to the source project.</TextBlock>
+            </Border>
+
+            <Border x:Name="VisitOverviewChart" 
+            		RelativePanel.Below="WarningText"
+                    MaxHeight="500"
+                    >
+                
+                <qc:SerialChart DataSource="{Binding VisitData}" CategoryValueMemberPath="Date">
+                    <qc:SerialChart.Graphs>
+                        <qc:AreaGraph Title="Visits" ValueMemberPath="Visits" />
+                        <qc:LineGraph Title="Page views" ValueMemberPath="PageViews" />
+                    </qc:SerialChart.Graphs>
+                </qc:SerialChart>
+
+            </Border>
+
+            <Border x:Name="RealTimeVisits" 
+            		RelativePanel.Below="VisitOverviewChart" 
+            		RelativePanel.AlignLeftWithPanel="True"
+
+            	    MinHeight="100" MaxHeight="200"
+            	    MinWidth="200" 
+                    >
+
+                <qc:SerialChart DataSource="{Binding RealTimeData}" CategoryValueMemberPath="Seconds">
+                    <qc:SerialChart.Graphs>
+                        <qc:ColumnGraph Title="Realtime visits" ValueMemberPath="Visits" >
+                            <qc:ColumnGraph.Brush>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FF1B956E" Offset="0"/>
+                                    <GradientStop Color="#FF03FDAD" Offset="1"/>
+                                </LinearGradientBrush>
+                            </qc:ColumnGraph.Brush>
+                        </qc:ColumnGraph>
+                    </qc:SerialChart.Graphs>
+                </qc:SerialChart>
+
+            </Border>
+            <Border x:Name="OSChart" 
+                    RelativePanel.Below="VisitOverviewChart"
+            		RelativePanel.RightOf="RealTimeVisits"
+
+                    MinHeight="200" MaxHeight="200"
+                    MinWidth="400"
+                    >
+
+                <qc:PieChart DataSource="{Binding OsData}" TitleMemberPath="Name" ValueMemberPath="Value" />
+
+            </Border>
+            <Border x:Name="NewVisitorsChart" 
+            		RelativePanel.Below="VisitOverviewChart"
+            		RelativePanel.AlignRightWithPanel="True"
+            		RelativePanel.RightOf="OSChart"
+                    MinHeight="100" MaxHeight="200" MinWidth="200" 
+                    >
+
+                <qc:SerialChart DataSource="{Binding VisitData}" CategoryValueMemberPath="Date">
+                    <qc:SerialChart.Graphs>
+                        <qc:ColumnGraph Title="New visitors" ValueMemberPath="NewVisits" />
+                    </qc:SerialChart.Graphs>
+                </qc:SerialChart>
+
+            </Border>
 
         </RelativePanel>
     </ScrollViewer>
