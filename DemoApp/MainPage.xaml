@@ -1,0 +1,60 @@
+﻿<Page
+    x:Class="DemoApp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DemoApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:qc="using:Ailon.QuickCharts"
+    Loaded="Page_Loaded"
+    mc:Ignorable="d">
+
+    <ScrollViewer HorizontalScrollMode="Disabled" VerticalScrollMode="Enabled" Padding="10">
+        <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <TextBlock Name="WarningText">WARNING: This demo app uses release nuget package rather than referencing directly to the source project.</TextBlock>
+            <qc:SerialChart Name="VisitOverviewChart" 
+                            DataSource="{Binding VisitData}"
+                            CategoryValueMemberPath="Date"
+                            RelativePanel.Below="WarningText" MaxHeight="500">
+                <qc:SerialChart.Graphs>
+                    <qc:AreaGraph Title="Visits" ValueMemberPath="Visits" />
+                    <qc:LineGraph Title="Page views" ValueMemberPath="PageViews" />
+                </qc:SerialChart.Graphs>
+            </qc:SerialChart>
+            <qc:PieChart Name="OSChart" 
+                         DataSource="{Binding OsData}"
+                         TitleMemberPath="Name" ValueMemberPath="Value"
+                         LegendVisibility="Visible"
+                         
+                         RelativePanel.Below="VisitOverviewChart" 
+                         RelativePanel.AlignLeftWithPanel="True"
+                         MinHeight="200" MaxHeight="200"
+                         MinWidth="300" MaxWidth="400"
+                         />
+            <qc:SerialChart Name="NewVisitorsChart" 
+                            DataSource="{Binding VisitData}"
+                            CategoryValueMemberPath="Date"
+                            RelativePanel.Below="VisitOverviewChart" 
+                            RelativePanel.RightOf="OSChart"
+                            MinHeight="100" MaxHeight="200" MaxWidth="500" MinWidth="200" >
+                <qc:SerialChart.Graphs>
+                    <qc:ColumnGraph Title="New visitors" ValueMemberPath="NewVisits" />
+                </qc:SerialChart.Graphs>
+            </qc:SerialChart>
+            <qc:SerialChart Name="RealTimeVisits" 
+                            DataSource="{Binding RealTimeData}"
+                            CategoryValueMemberPath="Seconds"
+                            RelativePanel.RightOf="NewVisitorsChart" 
+                            RelativePanel.Below="VisitOverviewChart"
+                            RelativePanel.AlignRightWithPanel="True"
+                            MinHeight="100" MaxHeight="200"
+                            MinWidth="200"
+                            >
+                <qc:SerialChart.Graphs>
+                    <qc:ColumnGraph Title="Realtime visits" ValueMemberPath="Visits" />
+                </qc:SerialChart.Graphs>
+            </qc:SerialChart>
+
+        </RelativePanel>
+    </ScrollViewer>
+</Page>
