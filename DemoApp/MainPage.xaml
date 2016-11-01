@@ -58,7 +58,7 @@
                     MaxHeight="500"
                     >
                 
-                <qc:SerialChart DataSource="{Binding VisitData}" CategoryValueMemberPath="Date">
+                <qc:SerialChart DataSource="{Binding VisitData}" CategoryValueMemberPath="Date" MinimumCategoryGridStep="100">
                     <qc:SerialChart.Graphs>
                         <qc:AreaGraph Title="Visits" ValueMemberPath="Visits" />
                         <qc:LineGraph Title="Page views" ValueMemberPath="PageViews" />
