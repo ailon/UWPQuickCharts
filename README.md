@@ -41,8 +41,9 @@ UWP QuickCharts is a crude port from the WPF/Silverlight/WP project developed in
 
 No code was modified from the 2010 version (except for namespace changes) unless it didn't work. So, obviously it doesn't adhere to the latest and greatest practices and doesn't use any APIs and techniques that were added in recent years. There's no doubt that the code can be substantially improved. Having said that, the controls are fully functional (few quirks notwithstanding) and can be used to enhance any UWP application with charting functionality.
 
-Some known quirks:
+Some known bugs, limitations and quirks:
 
+- charts are not theme-aware
 - when charts are resized AND data is updated sometimes data labels may disappear
 - tooltips in serial chart may not move along with mouse (users have to move mouse out of chart and back)
 
