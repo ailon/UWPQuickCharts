@@ -7,7 +7,7 @@ UWP QuickCharts is a simple charting library for Universal Windows Platform (XAM
 - 4 chart types: Line, Area and Column (via SerialChart), and Pie
 - Interactive value markers and tooltips
 - Data binding support to enable automatic real-time updates
-- Automatic adjustments based on control size: showing/hiding of axes, recalculaiton of tick marks and grid lines
+- Automatic adjustments based on control size: showing/hiding of axes, recalculation of tick marks and grid lines
 
 ## Usage
 
@@ -35,3 +35,20 @@ To add a Pie chart use PieChart control:
     
 Refer to included DemoApp project for more examples on how to use and customize the controls.
 
+## Known issues
+
+UWP QuickCharts is a crude port from the WPF/Silverlight/WP project developed in 2010 which in itself is based on now defunct amCharts WPF/Silverlight charts developed around 2008. (btw, the "real" [amCharts JavaScript charts and maps](https://www.amcharts.com/) are healthier than ever and are arguably the best charting controls for your web projects).
+
+No code was modified from the 2010 version (except for namespace changes) unless it didn't work. So, obviously it doesn't adhere to the latest and greatest practices and doesn't use any APIs and techniques that were added in recent years. There's no doubt that the code can be substantially improved. Having said that, the controls are fully functional (few quirks notwithstanding) and can be used to enhance any UWP application with charting functionality.
+
+## Future plans and roadmap
+
+The ultimate goal would be to add QuickCharts to [UWP Community Toolkit](http://www.uwpcommunitytoolkit.com) provided its stakeholders see the value. However, realistically, I realize that I won't be able to commit the time needed to adhere to all the ceremonies and changes required to meet [UWP Community Toolkit standards](https://github.com/Microsoft/UWPCommunityToolkit/blob/master/contributing.md). So if you are up to the task, please, get in touch and lead the way!
+
+## License
+
+UWP QuickCharts is released under the MIT license.
+
+## Get in touch
+
+The controls are developed by Alan Mendelevich. Contact me on Twitter at [@ailon](https://twitter.com/ailon) to discuss.
